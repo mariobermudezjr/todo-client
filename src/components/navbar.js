@@ -49,9 +49,6 @@ class Navbar extends Component {
               <Icon type="message" />
             </Menu.Item>
             <Menu.Item key="3">
-              <Icon type="search" />
-            </Menu.Item>
-            <Menu.Item key="4">
               <Search
                 style={{ paddingTop: '16px' }}
                 placeholder="input search text"
