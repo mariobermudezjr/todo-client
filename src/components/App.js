@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './navbar';
 import SectionA from './SectionA';
-import ThisLayout from './Layout';
+//import ThisLayout from './Layout';
 
 import Footer from './footer';
 class App extends Component {
