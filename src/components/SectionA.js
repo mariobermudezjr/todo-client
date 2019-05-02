@@ -31,6 +31,7 @@ class SectionA extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onChangeStar = this.onChangeStar.bind(this);
+    this.onAddTodo = this.onAddTodo.bind(this);
   }
   state = {
     todoList: []
@@ -63,6 +64,21 @@ class SectionA extends Component {
     this.setState({ todoList: updatedList });
   }
 
+  onAddTodo(e) {
+    const updatedList = this.state.todoList;
+    updatedList.push({
+      id: this.state.todoList.length + 1,
+      todoName: e.target.value,
+      dueDate: '05/06/19',
+      important: '',
+      complete: false
+    });
+
+    this.setState({ todoList: updatedList });
+
+    e.target.value = '';
+  }
+
   render() {
     return (
       <section id="Todo" className="SectionA">
@@ -70,6 +86,7 @@ class SectionA extends Component {
           <h2> Todo </h2>
           <Input
             placeholder="Add a to-do in 'inbox' "
+            onPressEnter={e => this.onAddTodo(e)}
             style={{ width: '100%', marginBottom: '6px' }}
             suffix={
               <div>
