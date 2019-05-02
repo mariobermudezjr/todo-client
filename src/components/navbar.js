@@ -41,20 +41,17 @@ class Navbar extends Component {
               <Avatar style={{ color: '#424242', backgroundColor: '#424242fff' }}>Avatar</Avatar>
             </span>
           </div>
+          <Search
+            style={{ marginTop: '14px', height: '30px', color: '#D4D4D4' }}
+            placeholder="input search text"
+            onSearch={value => console.log(value)}
+          />
           <Menu mode="horizontal" style={{ lineHeight: '64px' }} className="menu">
             <Menu.Item key="1">
               <Icon type="bell" />
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="message" />
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Search
-                style={{ paddingTop: '16px' }}
-                placeholder="input search text"
-                onSearch={value => console.log(value)}
-                enterButton
-              />
             </Menu.Item>
           </Menu>
         </StyledHeader>
