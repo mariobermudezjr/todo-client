@@ -3,25 +3,28 @@ import { Input, Icon, Checkbox } from 'antd';
 
 let dummyData = [
   {
-    id: '1',
+    id: '0',
     todoName: 'Fold clothes',
     dueDate: '05/02/19',
     important: '',
-    complete: false
+    complete: true,
+    isInEditMode: false
   },
   {
-    id: '2',
+    id: '1',
     todoName: 'Cook breakfast',
     dueDate: '05/04/19',
     important: '',
-    complete: false
+    complete: false,
+    isInEditMode: false
   },
   {
-    id: '3',
+    id: '2',
     todoName: 'Wash car',
     dueDate: '05/06/19',
     important: 'filled',
-    complete: false
+    complete: false,
+    isInEditMode: false
   }
 ];
 
@@ -33,10 +36,14 @@ class SectionA extends Component {
     this.onChangeStar = this.onChangeStar.bind(this);
     this.onAddTodo = this.onAddTodo.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleTodoInputChange = this.handleTodoInputChange.bind(this);
+    this.changeEditMode = this.changeEditMode.bind(this);
+    this.onBlurValue = this.onBlurValue.bind(this);
   }
   state = {
     todoList: [],
-    todoValue: ''
+    todoValue: '',
+    previousTodo: ''
   };
 
   componentDidMount() {
@@ -44,9 +51,15 @@ class SectionA extends Component {
   }
 
   onChange(e) {
-    // console.log(`checked = ${e.target.checked}`);
+    console.log(`checked = ${e.target.checked}`);
     // console.log(`checked = ${e.target.value}`);
-    const updatedList = this.state.todoList.filter(item => item.id !== e.target.value);
+    //const updatedList = this.state.todoList.filter(item => item.id !== e.target.value);
+    const updatedList = this.state.todoList.map(item => {
+      if (item.id === e.target.value) {
+        item.complete = !item.complete;
+      }
+      return item;
+    });
 
     this.setState({ todoList: updatedList });
   }
@@ -73,14 +86,49 @@ class SectionA extends Component {
       todoName: e.target.value,
       dueDate: '05/06/19',
       important: '',
-      complete: false
+      complete: false,
+      isInEditMode: false
     });
 
     this.setState({ todoList: updatedList, todoValue: '' });
   }
 
   handleInputChange(event) {
-    this.setState({todoValue: event.target.value})
+    this.setState({ todoValue: event.target.value });
+  }
+  handleTodoInputChange(event, id) {
+    const updatedList = this.state.todoList.map(item => {
+      if (item.id === id) {
+        item.todoName = event.target.value;
+      }
+      return item;
+    });
+    this.setState({ todoList: updatedList });
+  }
+
+  changeEditMode(id) {
+    const updatedList = this.state.todoList.map(item => {
+      if (item.id === id) {
+        item.isInEditMode = !item.isInEditMode;
+      }
+      return item;
+    });
+    this.setState({ todoList: updatedList });
+
+    //console.log(updatedList);
+
+    //this.setState({ todoList: updatedList, previousTodo: id });
+    this.setState({ previousTodo: id });
+  }
+
+  onBlurValue(event, id) {
+    const updatedList = this.state.todoList.map(item => {
+      if (item.id === id) {
+        item.isInEditMode = !item.isInEditMode;
+      }
+      return item;
+    });
+    this.setState({ todoList: updatedList });
   }
 
   render() {
@@ -114,9 +162,24 @@ class SectionA extends Component {
                 padding: '6px'
               }}
             >
-              <Checkbox value={todo.id} onChange={this.onChange}>
-                {todo.todoName}
-              </Checkbox>
+              <Checkbox value={todo.id} onChange={this.onChange} checked={todo.complete} />
+              <div onDoubleClick={() => this.changeEditMode(todo.id)}>
+                {todo.isInEditMode ? (
+                  <Input
+                    styles={{ width: '1000px' }}
+                    autoFocus={true}
+                    onBlur={e => this.onBlurValue(e, todo.id)}
+                    defaultValue={todo.todoName}
+                    onChange={e => this.handleTodoInputChange(e, todo.id)}
+                    onPressEnter={e => this.onBlurValue(e, todo.id)}
+                  />
+                ) : todo.complete ? (
+                  <strike>{todo.todoName}</strike>
+                ) : (
+                  todo.todoName
+                )}
+              </div>
+
               <Icon
                 onClick={() => this.onChangeStar(todo.id)}
                 type="star"
