@@ -19,6 +19,12 @@
   background: #f7f9fa;
 }
 
+.search-bar {
+  margin-top: 14px;
+  height: 30px;
+  color: #d4d4d4;
+}
+
 h2 {
   font-family: var(--title);
   font-size: 1.6rem;
@@ -91,7 +97,14 @@ h2 {
     margin: 0.5rem;
   }
   .SectionA h2 {
-    margin: 2rem 0 0 0;
+    margin: 0.5rem;
+  }
+
+  .search-bar {
+    margin-left: 16px;
+    margin-top: 16px;
+    height: 30px;
+    color: #d4d4d4;
   }
 
   .header {

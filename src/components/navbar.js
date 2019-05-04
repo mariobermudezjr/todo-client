@@ -43,14 +43,14 @@ class Navbar extends Component {
     return (
       <Layout>
         <StyledHeader className="header">
-          <div className="logo">
+          {/* <div className="logo">
             <span className="avatar-container">
               <Avatar style={{ color: '#424242', backgroundColor: '#424242fff' }}>Avatar</Avatar>
             </span>
-          </div>
+          </div> */}
           <Search
-            style={{ marginTop: '14px', height: '30px', color: '#D4D4D4' }}
-            placeholder="input search text"
+            className="search-bar"
+            placeholder="Search todo"
             onSearch={value => console.log(value)}
           />
           <Menu
