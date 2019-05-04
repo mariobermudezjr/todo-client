@@ -30,6 +30,19 @@ let dummyData = [
   }
 ];
 
+function sortByPriority(array) {
+  let sortedArray = [];
+
+  array.forEach(element => {
+    if (element.important === 'filled') {
+      sortedArray.unshift(element);
+    } else {
+      sortedArray.push(element);
+    }
+  });
+  return sortedArray;
+}
+
 class SectionA extends Component {
   constructor(props) {
     super(props);
@@ -50,7 +63,7 @@ class SectionA extends Component {
   };
 
   componentDidMount() {
-    this.setState({ todoList: dummyData });
+    this.setState({ todoList: sortByPriority(dummyData) });
   }
 
   onChange(e) {
@@ -82,7 +95,7 @@ class SectionA extends Component {
       return item;
     });
 
-    this.setState({ todoList: updatedList });
+    this.setState({ todoList: sortByPriority(updatedList) });
   }
 
   onAddTodo(e) {
