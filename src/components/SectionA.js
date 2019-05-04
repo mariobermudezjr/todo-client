@@ -9,7 +9,7 @@ let dummyData = [
     todoName: 'Fold clothes',
     dueDate: '05/02/19',
     important: '',
-    complete: true,
+    complete: false,
     isInEditMode: false
   },
   {
@@ -88,12 +88,13 @@ class SectionA extends Component {
     if (e.target.checked === true) {
       this.alerts();
     }
-    const updatedList = this.state.todoList.map(item => {
-      if (item.id === e.target.value) {
-        item.complete = !item.complete;
-      }
-      return item;
-    });
+    // const updatedList = this.state.todoList.map(item => {
+    //   if (item.id === e.target.value) {
+    //     item.complete = !item.complete;
+    //   }
+    //   return item;
+    // });
+    const updatedList = this.state.todoList.filter(item => item.id !== e.target.value);
 
     this.setState({ todoList: sortByCompleted(sortByPriority(updatedList)) });
   }
