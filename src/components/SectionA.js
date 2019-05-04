@@ -111,7 +111,7 @@ class SectionA extends Component {
       return item;
     });
 
-    this.setState({ todoList: sortByPriority(updatedList) });
+    this.setState({ todoList: sortByCompleted(sortByPriority(updatedList)) });
   }
 
   // Add a todo list item
