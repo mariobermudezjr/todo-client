@@ -35,8 +35,10 @@ function sortByPriority(array) {
 
   array.forEach(element => {
     if (element.important === 'filled') {
+      // add element to the start of array
       sortedArray.unshift(element);
     } else {
+      // add element to the end of array
       sortedArray.push(element);
     }
   });
@@ -66,13 +68,11 @@ class SectionA extends Component {
     this.setState({ todoList: sortByPriority(dummyData) });
   }
 
+  // When box is checked off
   onChange(e) {
     if (e.target.checked === true) {
       this.alerts();
     }
-    console.log(`checked = ${e.target.checked}`);
-    // console.log(`checked = ${e.target.value}`);
-    //const updatedList = this.state.todoList.filter(item => item.id !== e.target.value);
     const updatedList = this.state.todoList.map(item => {
       if (item.id === e.target.value) {
         item.complete = !item.complete;
@@ -83,6 +83,7 @@ class SectionA extends Component {
     this.setState({ todoList: updatedList });
   }
 
+  // When star is applied
   onChangeStar(id) {
     const updatedList = this.state.todoList.map(item => {
       if (item.id === id) {
@@ -98,6 +99,7 @@ class SectionA extends Component {
     this.setState({ todoList: sortByPriority(updatedList) });
   }
 
+  // Add a todo list item
   onAddTodo(e) {
     const updatedList = this.state.todoList;
     updatedList.push({
@@ -112,9 +114,12 @@ class SectionA extends Component {
     this.setState({ todoList: updatedList, todoValue: '' });
   }
 
+  // Change input box value
   handleInputChange(event) {
     this.setState({ todoValue: event.target.value });
   }
+
+  // Apply changes to existing todo
   handleTodoInputChange(event, id) {
     const updatedList = this.state.todoList.map(item => {
       if (item.id === id) {
@@ -125,6 +130,7 @@ class SectionA extends Component {
     this.setState({ todoList: updatedList });
   }
 
+  // Change variable to track which todo is in edit mode
   changeEditMode(id) {
     const updatedList = this.state.todoList.map(item => {
       if (item.id === id) {
@@ -132,14 +138,11 @@ class SectionA extends Component {
       }
       return item;
     });
-    this.setState({ todoList: updatedList });
 
-    //console.log(updatedList);
-
-    //this.setState({ todoList: updatedList, previousTodo: id });
-    this.setState({ previousTodo: id });
+    this.setState({ todoList: updatedList, previousTodo: id });
   }
 
+  // On clicking outside of focus
   onBlurValue(event, id) {
     const updatedList = this.state.todoList.map(item => {
       if (item.id === id) {
@@ -150,11 +153,11 @@ class SectionA extends Component {
     this.setState({ todoList: updatedList });
   }
 
+  // Create sound when called
   alerts = () => {
     let audio = new Audio(sound);
     this.myRef = React.createRef();
-    //return <audio ref={this.myRef} src={sound} autoPlay />;
-    return console.log(audio.play());
+    return audio.play();
   };
 
   render() {
