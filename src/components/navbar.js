@@ -30,6 +30,11 @@ const StyledHeader = styled(Header)`
     letter-spacing: 0.015625em;
     border-bottom: 0px;
   }
+  .ant-layout-header {
+    height: 64px;
+    padding: 0 10px;
+    line-height: 64px;
+  }
 `;
 class Navbar extends Component {
   render() {
@@ -46,7 +51,11 @@ class Navbar extends Component {
             placeholder="input search text"
             onSearch={value => console.log(value)}
           />
-          <Menu mode="horizontal" style={{ lineHeight: '64px' }} className="menu">
+          <Menu
+            mode="horizontal"
+            style={{ lineHeight: '64px', padding: '0px 10px' }}
+            className="menu"
+          >
             <Menu.Item key="1">
               <Icon type="bell" />
             </Menu.Item>
