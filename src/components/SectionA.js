@@ -45,6 +45,21 @@ function sortByPriority(array) {
   return sortedArray;
 }
 
+function sortByCompleted(array) {
+  let sortedArray = [];
+
+  array.forEach(element => {
+    if (element.complete === false) {
+      // add element to the start of array
+      sortedArray.unshift(element);
+    } else {
+      // add element to the end of array
+      sortedArray.push(element);
+    }
+  });
+  return sortedArray;
+}
+
 class SectionA extends Component {
   constructor(props) {
     super(props);
@@ -65,7 +80,7 @@ class SectionA extends Component {
   };
 
   componentDidMount() {
-    this.setState({ todoList: sortByPriority(dummyData) });
+    this.setState({ todoList: sortByCompleted(sortByPriority(dummyData)) });
   }
 
   // When box is checked off
@@ -80,7 +95,7 @@ class SectionA extends Component {
       return item;
     });
 
-    this.setState({ todoList: updatedList });
+    this.setState({ todoList: sortByCompleted(sortByPriority(updatedList)) });
   }
 
   // When star is applied
@@ -111,7 +126,7 @@ class SectionA extends Component {
       isInEditMode: false
     });
 
-    this.setState({ todoList: updatedList, todoValue: '' });
+    this.setState({ todoList: sortByCompleted(sortByPriority(updatedList)), todoValue: '' });
   }
 
   // Change input box value
@@ -210,7 +225,9 @@ class SectionA extends Component {
               </div>
 
               <Icon
-                onClick={() => this.onChangeStar(todo.id)}
+                onClick={() => {
+                  todo.complete ? console.log('Do nothing!') : this.onChangeStar(todo.id);
+                }}
                 type="star"
                 theme={todo.important}
                 style={{ color: 'rgba(0,0,0,.45)' }}
