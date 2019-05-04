@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Input, Icon, Checkbox } from 'antd';
 
+import sound from '../assets/sounds/sound.mp3';
+
 let dummyData = [
   {
     id: '0',
@@ -39,6 +41,7 @@ class SectionA extends Component {
     this.handleTodoInputChange = this.handleTodoInputChange.bind(this);
     this.changeEditMode = this.changeEditMode.bind(this);
     this.onBlurValue = this.onBlurValue.bind(this);
+    this.alerts = this.alerts.bind(this);
   }
   state = {
     todoList: [],
@@ -51,6 +54,9 @@ class SectionA extends Component {
   }
 
   onChange(e) {
+    if (e.target.checked === true) {
+      this.alerts();
+    }
     console.log(`checked = ${e.target.checked}`);
     // console.log(`checked = ${e.target.value}`);
     //const updatedList = this.state.todoList.filter(item => item.id !== e.target.value);
@@ -130,6 +136,13 @@ class SectionA extends Component {
     });
     this.setState({ todoList: updatedList });
   }
+
+  alerts = () => {
+    let audio = new Audio(sound);
+    this.myRef = React.createRef();
+    //return <audio ref={this.myRef} src={sound} autoPlay />;
+    return console.log(audio.play());
+  };
 
   render() {
     return (

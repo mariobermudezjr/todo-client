@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Avatar, Icon, Input } from 'antd';
 import styled from 'styled-components';
+
 const Search = Input.Search;
 const { Header } = Layout;
+
 const StyledHeader = styled(Header)`
   background: #303030 !important;
   display: flex;
