@@ -7,6 +7,7 @@
     "@fortawesome/react-fontawesome": "0.0.18",
     "antd": "^3.4.1",
     "particles.js": "^2.0.0",
+    "prop-types": "^15.7.2",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-fontawesome": "^1.6.1",
@@ -15,6 +16,7 @@
     "react-scripts": "1.1.4",
     "react-vertical-timeline-component": "^2.0.6",
     "redux": "^4.0.1",
+    "reselect": "^4.0.0",
     "styled-components": "^3.2.5"
   },
   "scripts": {
