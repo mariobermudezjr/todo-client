@@ -39,6 +39,22 @@ const StyledHeader = styled(Header)`
   }
 `;
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+  state = {
+    searchValue: ''
+  };
+
+  componentDidMount() {}
+
+  // Change input box value
+  handleInputChange(event) {
+    this.setState({ searchValue: event.target.value });
+  }
+
   render() {
     return (
       <Layout>
@@ -52,6 +68,8 @@ class Navbar extends Component {
             className="search-bar"
             placeholder="Search todo"
             onSearch={value => console.log(value)}
+            value={this.state.searchValue}
+            onChange={this.handleInputChange}
           />
           <Menu
             mode="horizontal"
