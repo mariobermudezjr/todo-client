@@ -68,6 +68,11 @@ h2 {
   min-height: calc(100vh - 140px);
 }
 
+.input-section {
+  display: flex;
+  flex-direction: row;
+}
+
 .SectionA img-container {
   display: flex;
 }
